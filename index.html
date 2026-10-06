@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grade calculator for high school and college students - weighted grades, GPA, and score statistics using if-else and loops." />
+  <title>Student Grade Calculator | High School &amp; College</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>🎓 Student Grade Calculator</h1>
+      <p>Weighted grades, GPA &amp; score analysis for high school and college students</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="tabs" role="tablist" aria-label="Calculator sections">
+      <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="weighted">Weighted Grade</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="gpa">GPA Calculator</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="stats">Score Analyzer</button>
+    </nav>
+
+    <main>
+      <!-- ============ 1. WEIGHTED GRADE CALCULATOR ============ -->
+      <section id="weighted" class="panel active" role="tabpanel" aria-label="Weighted grade calculator">
+        <div class="panel-header">
+          <h2>Weighted Grade Calculator</h2>
+          <p>Add each grading category (homework, quizzes, exams…) with its weight. All weights together must equal <strong>100%</strong>.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Weight (%)</th>
+                <th>Score (%)</th>
+                <th class="col-actions">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="weighted-rows"><!-- rows are created by script.js --></tbody>
+          </table>
+        </div>
+
+        <div class="toolbar">
+          <button type="button" id="weighted-add" class="btn btn-secondary">＋ Add Category</button>
+          <div class="toolbar-group">
+            <button type="button" id="weighted-sample" class="btn btn-ghost">Load Example</button>
+            <button type="button" id="weighted-reset" class="btn btn-ghost">Reset</button>
+            <button type="button" id="weighted-calc" class="btn btn-primary">Calculate Grade</button>
+          </div>
+        </div>
+
+        <p class="formula">Formula: final grade = &Sigma; (weight &divide; 100 &times; score), then converted to a letter grade with an if-else chain.</p>
+
+        <div id="weighted-message" class="feedback" role="alert" hidden></div>
+        <div id="weighted-result" class="result-card" aria-live="polite" hidden></div>
+      </section>
+
+      <!-- ============ 2. GPA CALCULATOR ============ -->
+      <section id="gpa" class="panel" role="tabpanel" aria-label="GPA calculator">
+        <div class="panel-header">
+          <h2>GPA Calculator</h2>
+          <p>Enter each course with its letter grade and credit hours. Honors (+0.5) and AP/IB (+1.0) bonuses apply only on the <strong>high school weighted</strong> scale.</p>
+        </div>
+
+        <div class="field-row">
+          <label for="gpa-scale">Grading scale</label>
+          <select id="gpa-scale">
+            <option value="college">College — unweighted 4.0 scale</option>
+            <option value="highschool">High school — weighted (Honors +0.5, AP/IB +1.0)</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Letter grade</th>
+                <th class="col-level">Course level</th>
+                <th>Credits</th>
+                <th class="col-actions">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="gpa-rows"><!-- rows are created by script.js --></tbody>
+          </table>
+        </div>
+
+        <div class="toolbar">
+          <button type="button" id="gpa-add" class="btn btn-secondary">＋ Add Course</button>
+          <div class="toolbar-group">
+            <button type="button" id="gpa-sample" class="btn btn-ghost">Load Example</button>
+            <button type="button" id="gpa-reset" class="btn btn-ghost">Reset</button>
+            <button type="button" id="gpa-calc" class="btn btn-primary">Calculate GPA</button>
+          </div>
+        </div>
+
+        <p class="formula" id="gpa-formula">Formula: GPA = &Sigma; (grade points &times; credits) &divide; &Sigma; credits on the unweighted 4.0 scale.</p>
+
+        <div id="gpa-message" class="feedback" role="alert" hidden></div>
+        <div id="gpa-result" class="result-card" aria-live="polite" hidden></div>
+      </section>
+
+      <!-- ============ 3. SCORE ANALYZER ============ -->
+      <section id="stats" class="panel" role="tabpanel" aria-label="Score analyzer">
+        <div class="panel-header">
+          <h2>Score Analyzer</h2>
+          <p>Paste any list of test or assignment scores. The program loops through every value to find the average, median, highest, lowest and letter-grade distribution.</p>
+        </div>
+
+        <label class="field-label" for="stats-input">Scores (0&ndash;100), separated by commas, spaces or new lines</label>
+        <textarea id="stats-input" rows="5" placeholder="88, 92, 76, 95, 84, 67, 91, 73, 85, 90"></textarea>
+
+        <div class="toolbar">
+          <button type="button" id="stats-sample" class="btn btn-secondary">Load Example</button>
+          <div class="toolbar-group">
+            <button type="button" id="stats-clear" class="btn btn-ghost">Clear</button>
+            <button type="button" id="stats-run" class="btn btn-primary">Analyze Scores</button>
+          </div>
+        </div>
+
+        <p class="formula">Passing = 60% or higher (D&minus; or above). Letter grades come from an if-else chain; every score is processed in a loop.</p>
+
+        <div id="stats-message" class="feedback" role="alert" hidden></div>
+        <div id="stats-result" class="result-card" aria-live="polite" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built with separate HTML, CSS and JavaScript files — the logic uses <strong>if-else statements</strong> and <strong>loops</strong>. Grades follow the standard US &plusmn; scale; always confirm with your school's handbook.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
