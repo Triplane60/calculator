@@ -1,35 +1,7 @@
-let toastTimeout;
+// Native browser alert notification
 function showAlert(title, message, type = 'success') {
-    const toast = document.getElementById('toast-alert');
-    const toastTitle = document.getElementById('toast-title');
-    const toastMessage = document.getElementById('toast-message');
-    const toastIcon = document.getElementById('toast-icon');
-
-    toastTitle.textContent = title;
-    toastMessage.textContent = message;
-
-    if (type === 'success') {
-        toastIcon.className = 'toast-icon success';
-        toastIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
-        toast.style.borderLeftColor = 'var(--primary)';
-    } else {
-        toastIcon.className = 'toast-icon error';
-        toastIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
-        toast.style.borderLeftColor = 'var(--danger)';
-    }
-
-    toast.classList.remove('hidden');
-
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-        toast.classList.add('hidden');
-    }, 4000);
+    alert(`${title}\n${message}`);
 }
-
-document.getElementById('toast-close-btn').addEventListener('click', () => {
-    clearTimeout(toastTimeout);
-    document.getElementById('toast-alert').classList.add('hidden');
-});
 function switchTab(tabName) {
     const tabs = document.querySelectorAll('.tab-btn');
     const sections = document.querySelectorAll('.calc-section');
