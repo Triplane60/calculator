@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade & GWA Calculator</title>
+    <link rel="stylesheet" href="gradecalculator.css">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="toast-alert" class="toast-alert hidden">
+        <div id="toast-icon" class="toast-icon success"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="toast-content">
+            <h4 id="toast-title">Success</h4>
+            <p id="toast-message">Action completed successfully.</p>
+        </div>
+        <button id="toast-close-btn" class="toast-close">&times;</button>
+    </div>
+
+    <div class="container">
+      
+        <header class="header">
+            <h1><i class="fa-solid fa-graduation-cap"></i> Student Grade Calculator</h1>
+            <p>Calculate your College GWA (1.0 - 5.0 scale) and High School Final Grades easily.</p>
+        </header>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('college')">
+                <i class="fa-solid fa-building-columns"></i> College GWA Calculator
+            </button>
+            <button class="tab-btn" onclick="switchTab('highschool')">
+                <i class="fa-solid fa-school"></i> High School Final Grade
+            </button>
+        </div>
+
+        <div id="college-section" class="calc-section active">
+            <div class="section-card">
+                <h2>College General Weighted Average (GWA)</h2>
+                <p class="instruction">Add your subjects, units/credits, and grades (e.g., 1.0, 1.25, 1.5, 1.75, 2.0, etc.).</p>
+                
+                <div class="table-wrapper">
+                    <table id="college-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Units / Credits</th>
+                                <th>Grade (1.00 - 5.00)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="college-tbody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="action-row">
+                    <button class="btn btn-secondary" onclick="addCollegeRow()"><i class="fa-solid fa-plus"></i> Add Subject</button>
+                    <button class="btn btn-outline" onclick="resetCollegeForm()">Reset</button>
+                </div>
+
+                <div class="compute-container">
+                    <button class="btn btn-primary btn-large" onclick="calculateCollegeGWA()">Calculate GWA</button>
+                </div>
+
+                <div id="college-result" class="result-box hidden">
+                    <h3>Your College GWA: <span id="college-gwa-value">0.00</span></h3>
+                    <p id="college-remark" class="remark">Status: --</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="highschool-section" class="calc-section">
+            <div class="section-card">
+                <h2>High School Component-Based Final Grade</h2>
+                <p class="instruction">Add grading components (e.g., Written Works, Performance Tasks, Quarterly Exams) and weights summing up to 100%.</p>
+                
+                <div class="table-wrapper">
+                    <table id="hs-table">
+                        <thead>
+                            <tr>
+                                <th>Component Category</th>
+                                <th>Weight (%)</th>
+                                <th>Score (%)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hs-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="action-row">
+                    <button class="btn btn-secondary" onclick="addHsRow()"><i class="fa-solid fa-plus"></i> Add Component</button>
+                    <button class="btn btn-outline" onclick="resetHsForm()">Reset</button>
+                </div>
+
+                <div class="compute-container">
+                    <button class="btn btn-primary btn-large" onclick="calculateHsGrade()">Calculate Final Grade</button>
+                </div>
+
+                <div id="hs-result" class="result-box hidden">
+                    <h3>Final Grade: <span id="hs-grade-value">0.00</span>%</h3>
+                    <p id="hs-remark" class="remark">Status: --</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="gradecalculator.js"></script>
+</body>
+</html>
